@@ -21,13 +21,13 @@
     />
     <link rel="stylesheet" href="Develop/style.css" />
     <title>Work Day Scheduler</title>
-
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="Develop/moment/moment.min.js"></script>
     <script src="Develop/jscript.js"></script>
     
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script> -->
-    <script src="Develop/moment/moment.min.js"></script>
     
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    
+    
 
   </head>
 
@@ -46,58 +46,58 @@
       
   
     <div class = "row">
-      <input type="time" class="hour">
-      <textarea class="col" placeholder="What is your task"></textarea>
-      <button class="saveBtn"><i class="fa fa-lock"></i></button>
+      <div class="hour nineAM"></div>
+      <textarea class="col" id="inputText"></textarea>
+      <button id="save" class="saveBtn"><i class="fa fa-lock"></i></button>
     </div>
 
       
     <div class = "row">
-      <input type="time" class="hour">
-      <textarea class="col" placeholder="What is your task"></textarea>
-      <button class="saveBtn"><i class="fa fa-lock"></i></button>
+      <div class="hour tenAM"></div>
+      <textarea class="col" id="inputText"></textarea>
+      <button id="save" class="saveBtn"><i class="fa fa-lock"></i></button>
     </div>
 
     <div class = "row">
-      <input type="time" class="hour">
-      <textarea class="col" placeholder="What is your task"></textarea>
-      <button class="saveBtn"><i class="fa fa-lock"></i></button>
+      <div class="hour elevenAM"></div>
+      <textarea class="col" id="inputText"></textarea>
+      <button id="save" class="saveBtn"><i class="fa fa-lock"></i></button>
     </div>
 
     <div class = "row">
-      <input type="time" class="hour">
-      <textarea class="col" placeholder="What is your task"></textarea>
-      <button class="saveBtn"><i class="fa fa-lock"></i></button>
+      <div class="hour twelveAM"></div>
+      <textarea class="col" id="inputText"></textarea>
+      <button id="save" class="saveBtn"><i class="fa fa-lock"></i></button>
     </div>
 
     <div class = "row">
-      <input type="time" class="hour">
-      <textarea class="col" placeholder="What is your task"></textarea>
-      <button class="saveBtn"><i class="fa fa-lock"></i></button>
+      <div class="hour onePM"></div>
+      <textarea class="col" id="inputText"></textarea>
+      <button id="save" class="saveBtn"><i class="fa fa-lock"></i></button>
     </div>
 
     <div class = "row">
-      <input type="time" class="hour">
-      <textarea class="col" placeholder="What is your task"></textarea>
-      <button class="saveBtn"><i class="fa fa-lock"></i></button>
+      <div class="hour twoPM"></div>
+      <textarea class="col" id="inputText"></textarea>
+      <button id="save" class="saveBtn"><i class="fa fa-lock"></i></button>
     </div>
 
     <div class = "row">
-      <input type="time" class="hour">
-      <textarea class="col" placeholder="What is your task"></textarea>
-      <button class="saveBtn"><i class="fa fa-lock"></i></button>
+      <div class="hour threePM"></div>
+      <textarea class="col" id="inputText"></textarea>
+      <button id="save"class="saveBtn"><i class="fa fa-lock"></i></button>
     </div>
 
     <div class = "row">
-      <input type="time" class="hour">
-      <textarea class="col" placeholder="What is your task"></textarea>
-      <button class="saveBtn"><i class="fa fa-lock"></i></button>
+      <div class="hour fourPM"></div>
+      <textarea class="col" id="inputText"></textarea>
+      <button id="save" class="saveBtn"><i class="fa fa-lock"></i></button>
     </div>
 
     <div class = "row">
-      <input type="time" class="hour">
-      <textarea class="col" placeholder="What is your task"></textarea>
-      <button class="saveBtn"><i class="fa fa-lock"></i></button>
+      <div class="hour fivePM"></div>
+      <textarea class="col" id="inputText"></textarea>
+      <button id="save" class="saveBtn"><i class="fa fa-lock"></i></button>
     </div>
 
     
@@ -106,11 +106,112 @@
     </div>
     
     <script> 
+
+  
       const currentDay = moment().format("dddd, ll");
       console.log(currentDay)
       $("#currentDay").append(currentDay)
 
-      </script>
+      const currentTime = moment().format("LT");
+      console.log(currentTime);
+
+      // Moment.js times input into schedule
+       
+        let scheduleTime9 = (moment().format("09:00 A"));
+            $(".nineAM").append(scheduleTime9);
+
+        let scheduleTime10 = (moment().format("10:00 A"));
+            $(".tenAM").append(scheduleTime10);
+
+        let scheduleTime11 = (moment().format("11:00 A"));
+            $(".elevenAM").append(scheduleTime11);
+
+        let scheduleTime12 = (moment().format("12:00 P"));
+            $(".twelveAM").append(scheduleTime12);
+
+        let scheduleTime1 = (moment().format("01:00 P"));
+            $(".onePM").append(scheduleTime1);
+     
+        let scheduleTime2 = (moment().format("02:00 P"));
+            $(".twoPM").append(scheduleTime2);
+        
+        let scheduleTime3 = (moment().format("03:00 P"));
+            $(".threePM").append(scheduleTime3);
+        
+        let scheduleTime4 = (moment().format("04:00 P"));
+            $(".fourPM").append(scheduleTime4);
+      
+        let scheduleTime5 = (moment().format("05:00 P"));
+            $(".fivePM").append(scheduleTime5);
+       
+
+
+
+        //Set Task Local Storage
+
+        // var inputText = $("#inputText").val;
+       
+        var saveButton = $("#save");
+        
+            saveButton.on("click", function(){
+              
+            var inputText = $("#inputText").val();
+            localStorage.setItem("text", inputText);
+              });
+            
+
+
+        //Remove Task Local Storage
+
+        var saveButton = $("#save");
+
+            saveButton.on("dblclick", function(){
+            var inputText = $("#inputText").val();
+            localStorage.removeItem("text");
+              });
+
+
+
+
+        //Add past, present, future class to textarea
+      // var past = $("textarea")
+      // var present = $("textarea")
+      // var future = $("textarea")
+
+      // past.addClass("past");
+      // present.addClass("present");
+      // future.addClass("future");
+
+    //scheduleTime array
+
+     
+      
+    const scheduleTime = [scheduleTime9, scheduleTime10, scheduleTime11, scheduleTime12, scheduleTime1, scheduleTime2, scheduleTime3, scheduleTime4, scheduleTime5];
+
+      // for (var i = 0; i<scheduleTime.length; i++){}
+         
+      function highlight (){
+         var past = $("textarea");
+         var present = $("textarea");
+         var future = $("textarea");
+            
+            if (scheduleTime < currentTime){
+        past.addClass(".past");
+
+      } 
+            if (scheduleTime == currentTime){
+        present.addClass(".present");
+
+      }
+            if (scheduleTime > currentTime){
+        future.addClass(".future");
+      }
+      highlight();
+    }
+
+
+
+    </script>
   
     
    
