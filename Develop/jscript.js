@@ -1,13 +1,11 @@
 
 
-
-
-
+//
 const currentDay = moment().format("dddd, ll");
 console.log(currentDay)
 $("#currentDay").append(currentDay)
 
-//.format("LT");
+
 
  
 
@@ -60,35 +58,12 @@ saveButton.on("click", function () {
 
 
 
-//Remove Task Local Storage
-
-var saveButton = $("#save");
-
-saveButton.on("dblclick", function () {
-
-    var inputText = $("#inputText").val();
-    localStorage.removeItem("text");
-});
-
-
-
-
-// //Add past, present, future class to textarea
-// var past = $("textarea")
-// var present = $("textarea")
-// var future = $("textarea")
-
-// past.addClass("past");
-// present.addClass("present");
-// future.addClass("future");
-
-//scheduleTime array
-
-
+//Create array of time for past, present, future comparison
 
 const scheduleTime = [9,10,11,12,13,14,15,16,17];
 
-// for (var i = 0; i<scheduleTime.length; i++){}
+
+//Function to comare time and highlight rows
 
 function highlight(i) {
    
@@ -107,7 +82,7 @@ function highlight(i) {
 }
 
 
-//eveything you save the text in th textarea
+//Click Button Function to save text 
 $(".saveBtn").on("click", function () {
     var id = $(this).attr("data-id")
 
@@ -118,7 +93,7 @@ $(".saveBtn").on("click", function () {
 })
 
 
-//display when page first loads up
+//For loop to display text on page load
 const currentTime = moment().hour()
 for (var i = 0; i < 9; i++) {
     highlight(i)
